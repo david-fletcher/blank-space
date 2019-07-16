@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <v-container class="background ma-0 pa-0" style="height: inherit">
+    <v-layout column align-space-around justify-center fill-height>
+      <editor-window />
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import EditorWindow from "./components/EditorWindow";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    'editor-window': EditorWindow
   }
 };
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.background {
+  background-color: #525252
+}
+.fill-parent {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 </style>
