@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "electron": "NODE_ENV=DEV vue-cli-service serve & sleep 5 && NODE_ENV=DEV electron src/app.js"
+    "electron": "NODE_ENV=DEV electron src/app.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",

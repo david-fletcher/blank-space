@@ -1,6 +1,7 @@
 <template>
-  <v-container class="background ma-0 pa-0" style="height: inherit">
+  <v-container class="background ma-0 pa-0" style="max-width: 100%; height: inherit">
     <v-layout column align-space-around justify-center fill-height>
+      <toolbar class="toolbar" />
       <editor-window />
     </v-layout>
   </v-container>
@@ -8,11 +9,13 @@
 
 <script>
 import EditorWindow from "./components/EditorWindow";
+import Toolbar from "./components/Toolbar";
 
 export default {
   name: "app",
   components: {
-    'editor-window': EditorWindow
+    'editor-window': EditorWindow,
+    'toolbar': Toolbar
   }
 };
 </script>

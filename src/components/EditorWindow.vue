@@ -35,5 +35,6 @@ export default {
   font-size: larger;
   height: 100%;
   padding: 10%;
+  padding-top: 5%;
 }
 </style>
