@@ -3,7 +3,8 @@
     <v-layout align-space-around justify-center column fill-height>
       <textarea
         v-model="file"
-        class="editor background white--text"
+        class="editor white--text"
+        :style="`background-color: ${background}`"
         @keydown.tab="addTab"
       />
     </v-layout>
@@ -13,6 +14,11 @@
 <script>
 export default {
   name: "EditorWindow",
+  computed: {
+    background() {
+      return this.$store.state.$background;
+    }
+  },
   methods: {
     addTab($event) {
       this.file += "    "; // four spaces

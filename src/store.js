@@ -4,7 +4,13 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    $background: '#525252'
+  },
+  mutations: {
+    updateBackground: (state, newColor) => {
+      state.$background = newColor;
+    }
+  },
   actions: {}
 });

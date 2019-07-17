@@ -3,16 +3,16 @@
     <v-fade-transition slot-scope="{ hover }">
       <v-toolbar
         flat
-        color="#525252"
-        dark
         dense
+        dark
         :class="hover ? 'appear' : 'disappear'"
+        :style="`background-color: ${background}`"
       >
         <v-spacer />
         <v-btn icon><v-icon>save</v-icon></v-btn>
         <v-btn icon><v-icon>folder_open</v-icon></v-btn>
-        <v-btn icon><v-icon>color_lens</v-icon></v-btn>
-        <v-btn icon><v-icon>settings</v-icon></v-btn>
+        <v-btn icon @click="$emit('color')"><v-icon>color_lens</v-icon></v-btn>
+        <v-btn icon @click="$emit('settings')"><v-icon>settings</v-icon></v-btn>
         <v-btn icon @click="toggleFullscreen"
           ><v-icon>{{ fullscreenIcon }}</v-icon></v-btn
         >
@@ -28,6 +28,9 @@ export default {
   computed: {
     fullscreenIcon() {
       return this.fullscreen ? "fullscreen_exit" : "fullscreen";
+    },
+    background() {
+      return this.$store.state.$background;
     }
   },
   methods: {
@@ -42,6 +45,9 @@ export default {
       }
 
       this.fullscreen = !this.fullscreen;
+    },
+    color() {
+      this.$store.commit('updateBackground', '#1976D2');
     }
   },
   data() {
@@ -59,7 +65,7 @@ export default {
 
 <style>
 .disappear {
-  opacity: 0.05;
+  opacity: 0;
 }
 .appear {
   opacity: 1;
