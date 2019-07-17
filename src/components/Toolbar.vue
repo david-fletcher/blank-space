@@ -15,15 +15,13 @@
 </template>
 
 <script>
-// import { remote } from 'electron';
-
 export default {
   name: "Toolbar",
   methods: {
     closeWindow() {
-      console.log("closing...");
-      // const window = remote.getCurrentWindow();
-      // window.close();
+      const { remote } = window.require('electron');
+      const w = remote.getCurrentWindow();
+      w.close();
     }
   }
 }
@@ -34,6 +32,6 @@ export default {
   opacity: 0.05;
 }
 .appear {
-  opacity: 0.9;
+  opacity: 1;
 }
 </style>
