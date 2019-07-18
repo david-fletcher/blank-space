@@ -45,9 +45,6 @@ export default {
       }
 
       this.fullscreen = !this.fullscreen;
-    },
-    color() {
-      this.$store.commit('updateBackground', '#1976D2');
     }
   },
   data() {

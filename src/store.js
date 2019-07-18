@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    $background: '#525252'
+    $background: "#525252"
   },
   mutations: {
     updateBackground: (state, newColor) => {

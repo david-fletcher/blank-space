@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card dark>
     <v-card-title>
       <h1 class="headline font-weight-black">Configure Colors</h1>
     </v-card-title>
@@ -7,7 +7,14 @@
       <h2 class="subheading font-weight-medium">Pick a background color:</h2>
       <v-container grid-list-sm fluid>
         <v-layout row wrap>
-          <v-btn v-for="(color, index) in colors" :key="index" :color="color" class="elevation-0" icon @click="chooseColor(color)" />
+          <v-btn
+            v-for="(color, index) in colors"
+            :key="index"
+            :color="color"
+            class="elevation-0"
+            icon
+            @click="chooseColor(color)"
+          />
         </v-layout>
       </v-container>
     </v-card-text>
@@ -19,7 +26,7 @@ export default {
   name: "ColorDialog",
   methods: {
     chooseColor(color) {
-      this.$emit('choose', color);
+      this.$emit("choose", color);
     }
   },
   data() {
@@ -43,10 +50,10 @@ export default {
         "#FF5722",
         "#795548",
         "#607D8B",
-        "#9E9E9E",
+        "#525252",
         "#000000"
       ]
-    }
+    };
   }
-}
+};
 </script>

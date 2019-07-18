@@ -5,7 +5,11 @@
     :style="`background-color: ${background}`"
   >
     <v-layout column align-space-around justify-center fill-height>
-      <toolbar class="toolbar" @color="openColorDialog" @settings="openSettingsDialog" />
+      <toolbar
+        class="toolbar"
+        @color="openColorDialog"
+        @settings="openSettingsDialog"
+      />
       <editor-window />
     </v-layout>
 
@@ -25,7 +29,7 @@ export default {
   components: {
     "color-dialog": ColorDialog,
     "editor-window": EditorWindow,
-    "toolbar": Toolbar
+    toolbar: Toolbar
   },
   computed: {
     background() {
@@ -41,14 +45,14 @@ export default {
       console.log("opening settings...");
     },
     changeBackground(color) {
-      this.$store.commit('updateBackground', color);
+      this.$store.commit("updateBackground", color);
       this.showColorDialog = false;
     }
   },
   data() {
     return {
       showColorDialog: false
-    }
+    };
   }
 };
 </script>
