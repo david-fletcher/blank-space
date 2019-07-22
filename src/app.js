@@ -13,10 +13,7 @@ app.on("ready", () => {
   let window = new BrowserWindow({
     width: 800,
     height: 600,
-    frame: false,
-    webPreferences: {
-      nodeIntegration: true
-    }
+    autoHideMenuBar: true
   });
   window.loadURL(url);
 });

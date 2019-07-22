@@ -13,10 +13,6 @@
         <v-btn icon><v-icon>folder_open</v-icon></v-btn>
         <v-btn icon @click="$emit('color')"><v-icon>color_lens</v-icon></v-btn>
         <v-btn icon @click="$emit('settings')"><v-icon>settings</v-icon></v-btn>
-        <v-btn icon @click="toggleFullscreen"
-          ><v-icon>{{ fullscreenIcon }}</v-icon></v-btn
-        >
-        <v-btn icon @click="closeWindow"><v-icon>close</v-icon></v-btn>
       </v-toolbar>
     </v-fade-transition>
   </v-hover>
@@ -34,28 +30,12 @@ export default {
     }
   },
   methods: {
-    closeWindow() {
-      this.w.close();
-    },
-    toggleFullscreen() {
-      if (this.fullscreen) {
-        this.w.setFullScreen(false);
-      } else {
-        this.w.setFullScreen(true);
-      }
 
-      this.fullscreen = !this.fullscreen;
-    }
   },
   data() {
     return {
-      w: null,
-      fullscreen: false
+      //
     };
-  },
-  mounted() {
-    const { remote } = window.require("electron");
-    this.w = remote.getCurrentWindow();
   }
 };
 </script>

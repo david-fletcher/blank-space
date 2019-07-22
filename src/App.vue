@@ -14,7 +14,7 @@
     </v-layout>
 
     <v-dialog v-model="showColorDialog">
-      <color-dialog @choose="changeBackground" />
+      <color-dialog @choose="changeBackground" @darkmode="changeText" />
     </v-dialog>
   </v-container>
 </template>
@@ -47,6 +47,13 @@ export default {
     changeBackground(color) {
       this.$store.commit("updateBackground", color);
       this.showColorDialog = false;
+    },
+    changeText(darkmode) {
+      if(darkmode) {
+        this.$store.commit("updateTextColor", "white");
+      } else {
+        this.$store.commit("updateTextColor", "black");
+      }
     }
   },
   data() {

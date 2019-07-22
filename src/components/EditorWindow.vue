@@ -3,8 +3,8 @@
     <v-layout align-space-around justify-center column fill-height>
       <textarea
         v-model="file"
-        class="editor white--text"
-        :style="`background-color: ${background}`"
+        class="editor"
+        :style="`background-color: ${background}; color: ${text}`"
         @keydown.tab="addTab"
       />
     </v-layout>
@@ -17,6 +17,10 @@ export default {
   computed: {
     background() {
       return this.$store.state.$background;
+    },
+    text() {
+      console.log(this.$store.state.$textcolor);
+      return this.$store.state.$textcolor;
     }
   },
   methods: {
