@@ -19,12 +19,12 @@ export default {
       return this.$store.state.$background;
     },
     text() {
-      console.log(this.$store.state.$textcolor);
       return this.$store.state.$textcolor;
     }
   },
   methods: {
     addTab($event) {
+      // FIXME: work with current cursor position
       this.file += "    "; // four spaces
       if ($event.preventDefault) {
         $event.preventDefault();

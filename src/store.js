@@ -6,14 +6,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     $background: "#525252",
-    $textcolor: "white"
+    $darkmode: true
   },
   mutations: {
     updateBackground: (state, newColor) => {
       state.$background = newColor;
     },
-    updateTextColor: (state, newColor) => {
-      state.$textcolor = newColor;
+    toggleDarkMode: state => {
+      state.$darkmode = !state.$darkmode;
     }
   },
   actions: {}

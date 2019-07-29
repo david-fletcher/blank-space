@@ -1,5 +1,5 @@
 <template>
-  <v-card dark>
+  <v-card>
     <v-card-title>
       <h1 class="headline font-weight-black">Configure Colors</h1>
     </v-card-title>
@@ -17,13 +17,6 @@
           />
         </v-layout>
       </v-container>
-      <h2 class="subheading font-weight-medium">Text Color:</h2>
-      <v-container>
-        <v-layout row>
-          <v-btn icon color="white" light :disabled="!darkmode" @click="toggleDarkMode"><v-icon>edit</v-icon></v-btn>
-          <v-btn icon color="black" dark :disabled="darkmode" @click="toggleDarkMode"><v-icon>edit</v-icon></v-btn>
-        </v-layout>
-      </v-container>
     </v-card-text>
   </v-card>
 </template>
@@ -34,15 +27,10 @@ export default {
   methods: {
     chooseColor(color) {
       this.$emit("choose", color);
-    },
-    toggleDarkMode() {
-      this.darkmode = !this.darkmode;
-      this.$emit("darkmode", this.darkmode);
     }
   },
   data() {
     return {
-      darkmode: false,
       colors: [
         "#F44336",
         "#E91E63",

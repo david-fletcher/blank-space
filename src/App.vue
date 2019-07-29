@@ -1,22 +1,24 @@
 <template>
-  <v-container
-    class="ma-0 pa-0"
-    style="max-width: 100%; height: inherit"
-    :style="`background-color: ${background}`"
-  >
-    <v-layout column align-space-around justify-center fill-height>
-      <toolbar
-        class="toolbar"
-        @color="openColorDialog"
-        @settings="openSettingsDialog"
-      />
-      <editor-window />
-    </v-layout>
+  <v-app :dark="darkmode">
+    <v-container
+      class="ma-0 pa-0"
+      style="max-width: 100%; height: inherit"
+      :style="`background-color: ${background}`"
+    >
+      <v-layout column align-space-around justify-center fill-height>
+        <toolbar
+          class="toolbar"
+          @color="openColorDialog"
+          @settings="openSettingsDialog"
+        />
+        <editor-window />
+      </v-layout>
 
-    <v-dialog v-model="showColorDialog">
-      <color-dialog @choose="changeBackground" @darkmode="changeText" />
-    </v-dialog>
-  </v-container>
+      <v-dialog v-model="showColorDialog">
+        <color-dialog @choose="changeBackground" />
+      </v-dialog>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -34,11 +36,13 @@ export default {
   computed: {
     background() {
       return this.$store.state.$background;
+    },
+    darkmode() {
+      return this.$store.state.$darkmode;
     }
   },
   methods: {
     openColorDialog() {
-      console.log("opening colors...");
       this.showColorDialog = true;
     },
     openSettingsDialog() {
@@ -47,13 +51,6 @@ export default {
     changeBackground(color) {
       this.$store.commit("updateBackground", color);
       this.showColorDialog = false;
-    },
-    changeText(darkmode) {
-      if(darkmode) {
-        this.$store.commit("updateTextColor", "white");
-      } else {
-        this.$store.commit("updateTextColor", "black");
-      }
     }
   },
   data() {
