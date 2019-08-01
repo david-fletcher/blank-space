@@ -8,8 +8,8 @@
         :style="`background-color: ${background}`"
       >
         <v-spacer />
-        <v-btn icon><v-icon>save</v-icon></v-btn>
-        <v-btn icon><v-icon>folder_open</v-icon></v-btn>
+        <v-btn icon @click="$emit('save')"><v-icon>save</v-icon></v-btn>
+        <v-btn icon @click="$emit('open')"><v-icon>folder_open</v-icon></v-btn>
         <v-btn icon @click="$emit('color')"><v-icon>color_lens</v-icon></v-btn>
         <v-btn icon @click="toggleDarkMode"
           ><v-icon>{{
@@ -29,9 +29,11 @@ export default {
     fullscreenIcon() {
       return this.fullscreen ? "fullscreen_exit" : "fullscreen";
     },
+    
     background() {
       return this.$store.state.$background;
     },
+    
     darkmode() {
       return this.$store.state.$darkmode;
     }

@@ -10,8 +10,10 @@
           class="toolbar"
           @color="openColorDialog"
           @settings="openSettingsDialog"
+          @save="saveFile"
+          @open="openFile"
         />
-        <editor-window />
+        <editor-window :bus="eventBus" />
       </v-layout>
 
       <v-dialog v-model="showColorDialog">
@@ -22,6 +24,8 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 import EditorWindow from "./components/EditorWindow";
 import Toolbar from "./components/Toolbar";
 import ColorDialog from "./components/ColorDialog";
@@ -37,6 +41,7 @@ export default {
     background() {
       return this.$store.state.$background;
     },
+
     darkmode() {
       return this.$store.state.$darkmode;
     }
@@ -45,17 +50,28 @@ export default {
     openColorDialog() {
       this.showColorDialog = true;
     },
+
     openSettingsDialog() {
       console.log("opening settings...");
     },
+
     changeBackground(color) {
       this.$store.commit("updateBackground", color);
       this.showColorDialog = false;
+    },
+
+    saveFile() {
+      this.eventBus.$emit('save');
+    },
+    
+    openFile() {
+      this.eventBus.$emit('open');
     }
   },
   data() {
     return {
-      showColorDialog: false
+      showColorDialog: false,
+      eventBus: new Vue()
     };
   }
 };
