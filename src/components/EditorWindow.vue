@@ -10,7 +10,6 @@
       />
     </v-layout>
     <a hidden ref="download" />
-    <input hidden type="file" ref="upload" accept=".txt" @change="chooseFile" />
   </v-container>
 </template>
 
@@ -27,10 +26,10 @@ export default {
     bus: {
       immediate: true,
       handler(bus) {
-        if(bus) {
+        if (bus) {
           this.eventBus = bus;
-          this.eventBus.$on('save', () => this.download());
-          this.eventBus.$on('open', () => this.upload());
+          this.eventBus.$on("save", () => this.download());
+          this.eventBus.$on("open", () => this.upload());
         }
       }
     }
@@ -58,46 +57,67 @@ export default {
     },
 
     insertString(str, index, insert) {
-      return str.substring(0, index) + insert + str.substring(index, str.length);
+      return (
+        str.substring(0, index) + insert + str.substring(index, str.length)
+      );
     },
 
-    setCaretToPos (input, pos) {
+    setCaretToPos(input, pos) {
       input.focus();
       input.setSelectionRange(pos, pos);
     },
 
     download() {
-      const link = this.$refs.download;
-      this.$nextTick(() => {
-        link.href = URL.createObjectURL(new Blob([this.file], { type: "plain/text" }));
-        link.download = "Untitled.txt";
-        link.click();
+      let filepath = this.remote.dialog.showSaveDialog(
+        this.remote.getCurrentWindow(),
+        {
+          filters: [{ name: "Plain Text", extensions: ["txt"] }]
+        }
+      );
+
+      this.fs.writeFile(filepath, this.file, err => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        console.log("saved");
       });
     },
 
     upload() {
-      const file = this.$refs.upload;
-      this.$nextTick(() => file.click());
-    },
+      let files = this.remote.dialog.showOpenDialog(
+        this.remote.getCurrentWindow(),
+        {
+          properties: ["openFile"],
+          filters: [{ name: "Plain Text", extensions: ["txt", "text"] }]
+        }
+      );
 
-    chooseFile($event) {
-      const files = $event.target.files;
       if (files.length > 0) {
-        let reader = new FileReader();
-        reader.onload = this.openFile;
-        reader.readAsText(files[0]);
+        this.fs.readFile(files[0], "utf-8", (err, data) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          this.file = data;
+        });
       }
-    },
-
-    openFile($event) {
-      this.file = $event.target.result;
     }
   },
   data() {
     return {
       file: "",
-      eventBus: null
+      eventBus: null,
+      remote: null,
+      fs: null
     };
+  },
+  mounted() {
+    const { remote } = window.require("electron");
+    this.remote = remote;
+
+    const fs = window.require("fs");
+    this.fs = fs;
   }
 };
 </script>
@@ -106,7 +126,7 @@ export default {
 .editor {
   resize: none;
   outline: none;
-  font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
   font-size: larger;
   letter-spacing: 0.1em;
   height: 100%;

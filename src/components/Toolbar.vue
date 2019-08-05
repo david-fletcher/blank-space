@@ -29,11 +29,11 @@ export default {
     fullscreenIcon() {
       return this.fullscreen ? "fullscreen_exit" : "fullscreen";
     },
-    
+
     background() {
       return this.$store.state.$background;
     },
-    
+
     darkmode() {
       return this.$store.state.$darkmode;
     }

@@ -61,11 +61,11 @@ export default {
     },
 
     saveFile() {
-      this.eventBus.$emit('save');
+      this.eventBus.$emit("save");
     },
-    
+
     openFile() {
-      this.eventBus.$emit('open');
+      this.eventBus.$emit("open");
     }
   },
   data() {
